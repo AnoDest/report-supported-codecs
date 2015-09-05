@@ -39,7 +39,13 @@ public class MyActivity extends Activity implements View.OnClickListener {
             MediaFormat qvgaLFormat = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, 320, 240);
             MediaFormat audioFormat2 = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, 48000, 2);
             MediaFormat audioFormat1 = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, 48000, 1);
-
+            JSONObject device = new JSONObject();
+            try {
+                device.put("device", String.format("%s %s", Build.BRAND, Build.MODEL));
+                device.put("os_version", Build.VERSION.RELEASE);
+            } catch (JSONException e) {
+            }
+            mJSONArray.put(device);
             for (MediaCodecInfo info : infos) {
                 builder.append(info.getName()).append("\n");
                 JSONObject json = new JSONObject();
